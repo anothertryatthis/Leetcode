@@ -7,7 +7,7 @@ public:
         
         sort(t.begin(), t.end());
         
-        for(int i = n-1; i >= 0; i--){
+        for(int i = n-1; i >= 0; i--){                         // Did not understand why it works with a dec loop instead of inc loop
             m[t[i]] = i;
         }
         
@@ -17,3 +17,26 @@ public:
         return nums;
     }
 };
+
+
+//Time Complexity = O(n), but couldn't understand
+
+vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
+        vector<int> answer;
+        int i, j;
+        int count[101] = {0, 0, 0};
+        for(i = 0; i < nums.size(); i++) {
+            count[nums[i]]++;
+        }
+        for(i = 1; i < 101; i++) {
+            count[i] += count[i - 1];
+        }
+        for(i = 0; i < nums.size(); i++) {
+            if(nums[i] == 0)
+                answer.push_back(0);
+            else
+                answer.push_back(count[nums[i] - 1]);
+                
+        }
+        return answer;
+    }
